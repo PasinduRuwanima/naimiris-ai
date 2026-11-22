@@ -46,9 +46,24 @@ This avoids unused dependencies and unneeded credentials in Phase 1.
 - [x] Run backend tests and probe the running health endpoint.
 - [x] Record actual results and remaining limitations.
 
+### Phase 2 — authorized in the subsequent frontend brief
+
+- [x] Inspect the existing Phase 1 implementation and preserve the health service.
+- [x] Build the design system, responsive application shell, and seven product pages.
+- [x] Add source-attributed education, growing sections, disease search and details.
+- [x] Build image upload/preview, analysis and chat interfaces with honest unavailable states.
+- [x] Add centralized typed service proposals, cancellation, errors and runtime validation.
+- [x] Add frontend behavior tests and production/type-check verification.
+- [x] Document contracts, sources, limitations, and Phase 3 handoff.
+
+See [Phase 2 checklist](PHASE_2_CHECKLIST.md) and
+[Phase 2 delivery report](PHASE_2_VERIFICATION.md) for actual verification results.
+Phase 2 implements the frontend only. No training, RAG or new backend product
+endpoints are included. Sinhala Unicode is supported; full UI translation is pending.
+
 ### Later phases — require a subsequent instruction
 
-2. Design system, navigation, bilingual educational pages, and reviewed sources.
+2. Frontend delivered in Phase 2; local expert review and complete translations remain pending.
 3. Core APIs, secure image validation, disease schemas, and service contracts.
 4. Inspect dataset documentation and actual files; audit licenses, labels,
    duplicates, provenance, and splitting before any training.

@@ -29,7 +29,7 @@ export function HealthCheck() {
           {state.status === 'checking' ? 'Checking connection' : state.status === 'available' ? 'Backend connected' : 'Backend unavailable'}
         </span>
       </div>
-      <h2 id="health-heading">A foundation you can verify.</h2>
+      <h2 id="health-heading">A connection you can verify.</h2>
       <div role="status" aria-live="polite" className="health-message">
         {state.status === 'checking' && <p>Contacting the backend health endpoint…</p>}
         {state.status === 'available' && <p>{state.data.service} · v{state.data.version}. The HTTP service is running. Model and chatbot services are not implemented yet.</p>}

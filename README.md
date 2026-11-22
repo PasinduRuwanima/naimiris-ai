@@ -4,12 +4,15 @@
 Advisory System**
 
 A single monorepo for a responsible bilingual farming research platform.
-**Phase 1 only is implemented:** a React/TypeScript foundation screen, a FastAPI
-health endpoint, development tooling, initial tests, and research documentation.
+**Phase 2 frontend is implemented:** a responsive React/TypeScript application
+with seven product pages, a growing guide, searchable disease references,
+image-upload and chat interfaces, typed API clients, and frontend tests.
+The existing FastAPI health endpoint and Phase 1 tooling are preserved.
 
-No classifier, chatbot, agricultural recommendations, database, or deployed
-service is available yet. Nai Miris-specific model performance has not been
-established. See [current limitations](docs/LIMITATIONS.md).
+No classifier, AI chatbot service, database, or deployed service is available
+yet. General pepper education is source-attributed; local agronomic review and
+Nai Miris-specific model validation remain pending. See
+[current limitations](docs/LIMITATIONS.md).
 
 ## Requirements
 
@@ -57,7 +60,7 @@ npm run dev:backend
 npm run dev:frontend
 ```
 
-Open <http://127.0.0.1:5173>. The setup screen checks the real backend via the
+Open <http://127.0.0.1:5173>. The About Project page checks the real backend via the
 Vite `/api` proxy. API health is <http://127.0.0.1:8000/api/health>; interactive
 OpenAPI documentation is <http://127.0.0.1:8000/docs>.
 
@@ -84,10 +87,40 @@ npm test
 ```
 
 The frontend build runs strict TypeScript checks and Vite production compilation.
-Vitest checks health contract handling, unavailable/retry states, routing, and
-explicit capability limitations. Pytest checks health, OpenAPI, CORS,
+Run `npm run typecheck --workspace @naimiris/frontend` for type-checking alone.
+Vitest checks navigation, upload validation/preview/removal/cancellation, chat,
+Unicode input, library filtering, health retry and typed API error handling.
+There is no configured lint command. Pytest checks health, OpenAPI, CORS,
 environment settings, and safe error handling. See the actual executed results
-in [Phase 1 verification](docs/PHASE_1_VERIFICATION.md).
+in [Phase 1 verification](docs/PHASE_1_VERIFICATION.md) and
+[Phase 2 verification](docs/PHASE_2_VERIFICATION.md).
+
+With Vite running, `node scripts/check-frontend-browser.mjs` runs dependency-free
+headless Edge smoke checks at 360, 390, 768 and 1440 px. Set `BROWSER_PATH` for an
+installed Chromium browser on another platform. This script uses a temporary
+browser profile and does not need browser automation npm dependencies.
+
+## Frontend routes
+
+| Route | Experience |
+| --- | --- |
+| `/` | Landing page, feature previews and research limitations |
+| `/about-nai-miris` | Local context, botanical caveats and references |
+| `/growing-guide` | Fourteen stages with section navigation |
+| `/disease-detector` | Validated file selection, preview, analysis and unavailable state |
+| `/disease-library` | Searchable, filterable educational references |
+| `/disease-library/:id` | Symptoms, possible causes, management and sources |
+| `/chatbot` | English/Sinhala input, suggested questions, cancellation and retry |
+| `/about-project` | Research scope, candidate datasets, architecture and live API health |
+
+The frontend works without FastAPI for learning and navigation. Analyze and Send
+call the proposed APIs and report their real errors; they never generate mock
+results. See [API handoff](docs/FRONTEND_API_CONTRACTS.md). The upload limit is a
+provisional 5 MB (`VITE_MAX_UPLOAD_MB`), to be agreed with backend enforcement in
+Phase 3. All `VITE_*` variables are public, never secret storage.
+
+Production static hosting needs an SPA fallback for deep links and either
+same-origin `/api` routing or a configured backend origin.
 
 ## Structure and plan
 
@@ -107,8 +140,8 @@ Read the [implementation checklist](docs/IMPLEMENTATION_PLAN.md),
 [ML methodology](docs/ML_METHODOLOGY.md), [evaluation status](docs/MODEL_EVALUATION.md),
 [chatbot design](docs/CHATBOT_DESIGN.md), and [deployment notes](docs/DEPLOYMENT.md).
 
-**Next: Phase 2**, the design system, navigation, and source-attributed educational
-pages. Do not proceed to it without a subsequent instruction.
+**Next: Phase 3**, backend product API design and secure validation. Phase 2 stops
+at the frontend; further phases require a subsequent instruction.
 
 ## Research and privacy commitments
 
@@ -118,5 +151,8 @@ photographs, plants, sessions, and augmented copies across splits. Keep datasets
 checkpoints, secrets, and private farmer data outside Git. Do not retain uploaded
 images by default. Persistence needs consent, retention, and deletion controls.
 
-The foundation's plant illustration is original inline SVG and uses no external
-photography. Educational content needs verified sources before publication.
+The frontend uses a credited Pexels chilli photograph, explicitly marked as
+general imagery rather than verified local Nai Miris. Educational summaries
+link to botanical and extension references. See the
+[source and photography record](docs/PHASE_2_SOURCES.md). Local expert review is
+still needed before variety-specific agronomic recommendations.
