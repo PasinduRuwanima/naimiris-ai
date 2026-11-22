@@ -1,0 +1,15 @@
+{
+  "name": "naimiris-ai",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": ["frontend"],
+  "engines": { "node": ">=24 <25", "npm": ">=11 <12" },
+  "scripts": {
+    "dev:frontend": "npm run dev --workspace @naimiris/frontend",
+    "dev:backend": "node scripts/backend.mjs dev",
+    "build": "npm run build --workspace @naimiris/frontend",
+    "test:frontend": "npm run test --workspace @naimiris/frontend",
+    "test:backend": "node scripts/backend.mjs test",
+    "test": "npm run test:frontend && npm run test:backend"
+  }
+}
